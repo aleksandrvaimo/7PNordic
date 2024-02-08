@@ -1,0 +1,55 @@
+version: "3.8"
+services:
+    nginx:
+        container_name: nginx
+        build: ./docker/nginx
+        links:
+            - php
+        ports:
+            - 80:80
+        volumes:
+            - ./html:/var/www/html
+    php:
+        container_name: php
+        build: ./docker/php
+        links:
+            - mysql
+        ports:
+            - 9000:9000
+        volumes:
+            - ./html:/var/www/html
+            - ./docker/php/www.conf:/usr/local/etc/php-fpm.d/www.conf
+            - ./docker/php/php.ini:/usr/local/etc/php/conf.d/php.ini
+            - ./docker/php/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+            - ./docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
+        environment:
+            MYSQL_USER: user
+            MYSQL_PASSWORD: test
+            PHP_XDEBUG_ENABLED: 1
+            XDEBUG_CONFIG: remote_host=host.docker.internal
+            PHP_IDE_CONFIG: "serverName=html"
+        working_dir: /var/www/html
+    mysql:
+        image: mysql/mysql-server:8.0.23
+        container_name: mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: db
+            MYSQL_USER: user
+            MYSQL_PASSWORD: test
+        ports:
+            - 3306:3306
+        volumes:
+            - ./database/mysql:/var/lib/mysql
+    phpmyadmin:
+        image: lscr.io/linuxserver/phpmyadmin:latest
+        container_name: pma
+        links:
+            - mysql
+        environment:
+            PMA_HOST: mysql
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
+        restart: always
+        ports:
+            - 8085:80

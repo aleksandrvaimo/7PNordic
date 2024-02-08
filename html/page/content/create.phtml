@@ -1,0 +1,48 @@
+<?php
+/**
+ * Copyright © ...
+ */
+
+use Block\Page;
+$block = new Page();
+?>
+<div class="item mt-5">
+    <h3><?= $block->getCreateFormTitle(); ?></h3>
+    <form action="<?= $block->getUrl(); ?>" class="create-customer col-12 mx-auto mt-2" method="POST">
+        <div class="row">
+            <div class="col">Username</div>
+            <div class="col">Firstname</div>
+            <div class="col">Lastname</div>
+            <div class="col">Date Of Birth</div>
+            <div class="col">Password</div>
+            <div class="col">Action</div>
+        </div>
+        <div class="row">
+            <div class="col form-group">
+                <input type="text" class="username form-control" name="username" placeholder="eg. Username123" aria-label="Username" value="" />
+            </div>
+            <div class="col form-group">
+                <input type="text" class="form-control" name="firstname" placeholder="eg. John" aria-label="Firstname" value="" />
+            </div>
+            <div class="col form-group">
+                <input type="text" class="form-control" name="lastname" placeholder="eg. Smith" aria-label="Lastname" value="" />
+            </div>
+            <div class="col form-group">
+                <input type="text" class="form-control dob" name="dob" placeholder="eg. 2024-01-01" aria-label="Date Of Birth" value="" />
+            </div>
+            <div class="col form-group">
+                <input type="password" class="form-control" name="password" placeholder="Password" aria-label="Password" value="" />
+            </div>
+            <div class="col form-group">
+                <input type="hidden" class="form-control" name="crud" value="create" />
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+    jQuery(document).ready(function() {
+        new $.workWithCustomer();
+    })
+</script>

@@ -1,0 +1,62 @@
+<?php
+/**
+ * Copyright © ...
+ */
+
+use Customer\Model\CustomerData;
+use Customer\Model\Collection;
+use Customer\Model\Validation;
+use Customer\Model\Resource\Collection as ResourceCollection;
+
+use Block\Page;
+use Message\Model\Message;
+$validation = new Validation();
+$collection = new Collection(new ResourceCollection(new Message), $validation);
+$block = new Page();
+
+$collection = $collection->getCollection();
+?>
+
+<div class="col-12 mx-auto mt-5">
+    <h3><?= $block->getCollectionTitle(); ?></h3>
+    <?php if ($collection): ?>
+        <div class="row">
+            <div class="col"><a href="<?= $block->getSortUrl('username') ?>">Username</a></div>
+            <div class="col"><a href="<?= $block->getSortUrl('firstname') ?>">Firstname</a></div>
+            <div class="col"><a href="<?= $block->getSortUrl('lastname') ?>">Lastname</a></div>
+            <div class="col"><a href="<?= $block->getSortUrl('dob') ?>">Date Of Birth</a></div>
+            <div class="col">Password</div>
+            <div class="col">Action</div>
+        </div>
+        <?php /** @var $item CustomerData */
+        foreach ($collection as $key => $item): ?>
+            <form action="<?= $block->getUrl(); ?>" class="update-customer col-12 mx-auto mt-1" method="POST">
+                <div class="row">
+                    <div class="col form-group">
+                        <input type="text" class="username form-control" name="username" placeholder="Username" aria-label="Username" value="<?= $item->getUsername(); ?>" />
+                    </div>
+                    <div class="col form-group">
+                        <input type="text" class="form-control" name="firstname" placeholder="Firstname" aria-label="Firstname" value="<?= $item->getFirstname(); ?>" />
+                    </div>
+                    <div class="col form-group">
+                        <input type="text" class="form-control" name="lastname" placeholder="Lastname" aria-label="Lastname" value="<?= $item->getLastname(); ?>" />
+                    </div>
+                    <div class="col form-group">
+                        <input type="text" class="form-control dob" name="dob" placeholder="Date Of Birth" aria-label="Date Of Birth" value="<?= $item->getDob(); ?>" />
+                    </div>
+                    <div class="col form-group">
+                        <input type="password" class="form-control password" name="password" placeholder="******" aria-label="Password" value="" />
+                    </div>
+                    <div class="col">
+                        <td><button type="submit" class="btn crud-update btn-outline-primary">Update</button></td>
+                        <td><button type="submit" class="btn crud-delete btn-danger">Delete</button></td>
+                        <input type="hidden" class="form-control customer" name="id" value="<?= $item->getId(); ?>" />
+                        <input type="hidden" class="form-control crud" name="crud" value="" />
+                    </div>
+                </div>
+            </form>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <?= $block->getEmptyCollectionTitle() ?>
+    <?php endif; ?>
+</div>
