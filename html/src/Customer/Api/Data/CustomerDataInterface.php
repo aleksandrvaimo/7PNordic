@@ -12,5 +12,6 @@ interface CustomerDataInterface
     public const FIRSTNAME ='firstname';
     public const LASTNAME ='lastname';
     public const DOB ='dob';
+
     public function prepareCustomer(array $customerData = []): CustomerDataInterface;
 }

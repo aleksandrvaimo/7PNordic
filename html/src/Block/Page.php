@@ -6,6 +6,7 @@
 namespace Block;
 
 use Api\PageInterface;
+use function htmlspecialchars;
 
 class Page implements PageInterface
 {
@@ -48,17 +49,32 @@ class Page implements PageInterface
      */
     public function getSortUrl(?string $sort = null): string
     {
-        $search = $_GET['q'] ?? null;
-        $queryStrings = '';
+        $queryStrings = $this->getQueryStrings();
+        $queryStrings .= self::PARAM_SORT . '=' . $sort;
 
-        if ($search) {
-            $queryStrings = '?q=' . $search;
-        }
+        return htmlspecialchars($this->getBaseUrl() . $queryStrings, ENT_QUOTES, 'UTF-8' );
+    }
 
-        $queryStrings .= empty($queryStrings) ? '?' : '&';
-        $queryStrings .= 'sort=' . $sort;
-        $url = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . '://' . $_SERVER['HTTP_HOST'] . $queryStrings;
+    public function isSearchUsed(): bool
+    {
+        return isset($_GET[self::PARAM_SEARCH]);
+    }
 
-        return htmlspecialchars($url, ENT_QUOTES, 'UTF-8' );
+    /**
+     * @return string
+     */
+    private function getQueryStrings(): string
+    {
+        return $this->isSearchUsed()
+            ? '?' . self::PARAM_SEARCH . '=' . $_GET[self::PARAM_SEARCH] . '&'
+            : '?';
+    }
+
+    /**
+     * @return string
+     */
+    private function getBaseUrl(): string
+    {
+        return (empty($_SERVER['HTTPS']) ? 'http' : 'https') . '://' . $_SERVER['HTTP_HOST'];
     }
 }

@@ -16,11 +16,12 @@ $block = new Page();
             <div class="col form-group">
                 <input type="hidden" class="form-control" name="crud" value="search" />
                 <button type="submit" class="btn btn-primary search">Submit</button>
-                <a href="/" class="btn btn-primary search">Show All</a>
+                <?php if ($block->isSearchUsed()): ?>
+                    <a href="/" class="btn btn-primary search">Show All</a>
+                <?php endif; ?>
             </div>
         </div>
     </form>
-
 </div>
 
 <script type="text/javascript">

@@ -12,8 +12,8 @@ use Message\Api\MessageInterface;
 
 abstract class Action
 {
-    const HTTP_X_REQUESTED_WITH = 'HTTP_X_REQUESTED_WITH';
-    const XML_HTTP_REQUEST = 'xmlhttprequest';
+    public const HTTP_X_REQUESTED_WITH = 'HTTP_X_REQUESTED_WITH';
+    public const XML_HTTP_REQUEST = 'xmlhttprequest';
 
     protected Customer $request;
     protected ValidationInterface $validation;

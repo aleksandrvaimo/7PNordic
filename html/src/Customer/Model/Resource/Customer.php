@@ -10,6 +10,7 @@ use Connection\MyDB;
 class Customer extends MyDB
 {
     private array $userById = [];
+
     private array $userByUsername = [];
 
     public function getCustomerById(string $id): false|array

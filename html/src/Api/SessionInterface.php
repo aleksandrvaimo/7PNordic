@@ -7,5 +7,5 @@ namespace Api;
 
 interface SessionInterface
 {
-    const KEY_MSG = 'msg';
+    public const KEY_MSG = 'msg';
 }

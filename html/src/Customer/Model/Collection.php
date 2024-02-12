@@ -13,6 +13,7 @@ use Customer\Model\CustomerDataFactory;
 class Collection implements CollectionInterface
 {
     private CustomerCollection $request;
+
     private ValidationInterface $validation;
     public function __construct(CustomerCollection $request, ValidationInterface $validation)
     {
