@@ -12,6 +12,7 @@ use Customer\Api\CustomerInterface;
 class Customer implements CustomerInterface
 {
     private ResourceCustomer $request;
+
     private CustomerData $customerData;
 
     public function __construct(ResourceCustomer $request, CustomerDataInterface $customerData)

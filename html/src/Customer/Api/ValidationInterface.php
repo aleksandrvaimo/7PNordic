@@ -7,17 +7,18 @@ namespace Customer\Api;
 
 interface ValidationInterface
 {
-    const PATTERN = '/[^a-zA-Z0-9-]+/';
-    const PATTERN_DATE = '/[^0-9-]+/';
-    const PATTERN_ID = '/[^0-9]+/';
-    const PATTERN_NAME = '/[^a-zA-Z]+/';
-    CONST MAX_LENGTH = 3;
-    const PARAM_USERNAME = 'username';
-    const PARAM_PASSWORD = 'password';
-    const PARAM_CRUD = 'crud';
-    const PARAM_DOB = 'dob';
-    const PARAM_ID = 'id';
-    const PARAMS = [
+    public const PATTERN = '/[^a-zA-Z0-9-]+/';
+    public const PATTERN_DATE = '/[^0-9-]+/';
+    public const PATTERN_ID = '/[^0-9]+/';
+    public const PATTERN_NAME = '/[^a-zA-Z]+/';
+    public const MAX_LENGTH = 3;
+    public const PARAM_USERNAME = 'username';
+    public const PARAM_PASSWORD = 'password';
+    public const PARAM_CRUD = 'crud';
+    public const PARAM_DOB = 'dob';
+    public const PARAM_ID = 'id';
+    public const DATE_FORMAT = 'Y-m-d';
+    public const PARAMS = [
         'id' => self::PATTERN_ID,
         'username' => self::PATTERN,
         'password' => self::PATTERN,

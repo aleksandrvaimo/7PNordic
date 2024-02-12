@@ -218,7 +218,7 @@ class Validation implements ValidationInterface
     /**
      * Change date format in case needed
      */
-    private function changeDateFormat(string $value, ?string $format = 'Y-m-d'): string
+    private function changeDateFormat(string $value, ?string $format = self::DATE_FORMAT): string
     {
         return date($format, strtotime($value));
     }

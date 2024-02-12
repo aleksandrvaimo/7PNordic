@@ -30,7 +30,7 @@ $collection = $collection->getCollection();
         </div>
         <?php /** @var $item CustomerData */
         foreach ($collection as $key => $item): ?>
-            <form action="<?= $block->getUrl(); ?>" class="update-customer col-12 mx-auto mt-1" method="POST">
+            <form action="<?= $block->getUrl(); ?>" class="update-customer col-12 mx-auto mt-2" method="POST">
                 <div class="row">
                     <div class="col form-group">
                         <input type="text" class="username form-control" name="username" placeholder="Username" aria-label="Username" value="<?= $item->getUsername(); ?>" />
